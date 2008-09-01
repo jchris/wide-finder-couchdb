@@ -2,27 +2,27 @@ require 'rubygems'
 require 'couchrest'
 
 couch = CouchRest.new("http://localhost:5984")
-db = couch.database('wide-finder')
+db = couch.database('wide-finder2')
 db.delete! rescue nil
-db = couch.create_db('wide-finder')
+db = couch.create_db('wide-finder2')
 
-logfile = File.dirname(__FILE__) + '/wf100k.log'
+# usage: ruby import_log.rb logfile.log
 
-File.open(logfile, 'r') do |file|
-  lines = []
-  chunk = 0
-  while line = file.gets
-    lines << line
-    if lines.length > rand(100)
-      db.save({
-        :chunk => chunk, 
-        :lines => lines
-      })
-      chunk += 1
-      $stdout.putc 'c'
-      $stdout.flush
-      lines = []
-    end
+puts "Each . corresponds to about 12 lines of logfile, or 1 new doc in CouchDB. The # of lines per doc is randomized to more closely mirror realistic usage."
+
+lines = []
+chunk = 0
+while line = gets
+  lines << line
+  if lines.length > rand(100)
+    db.save({
+      :chunk => chunk, 
+      :lines => lines
+    })
+    chunk += 1
+    $stdout.putc '.'
+    $stdout.flush
+    lines = []
   end
 end
 
