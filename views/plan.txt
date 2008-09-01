@@ -1,0 +1,34 @@
+Top URIs by hit:
+
+map # this can piggyback on the bytes count, with it's own reduce
+  emit(uri, bytes)
+reduce
+  count rows
+  group = true
+
+Top URIs by bytes
+
+map
+  emit(uri, bytes)
+reduce
+  sum bytes
+  group = true
+
+# show how the above views can be grouped by other interesting ranges, like date and such, on the fly
+
+
+Top 10 404 URIs
+(just uris by hit, with a condition that the code be 404)
+
+Top 10 Clients Addresses
+
+map
+  emit(client, 1) # we can do the bytes trick here, too
+row count reduce  
+
+
+Top 10 Referrers
+
+map
+  emit(referrer, 1) # we can do the bytes trick here, too
+row count reduce  
