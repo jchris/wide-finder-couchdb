@@ -2,9 +2,9 @@ require 'rubygems'
 require 'couchrest'
 
 couch = CouchRest.new("http://localhost:5984")
-db = couch.database('wide-finder2')
+db = couch.database('wide-finder')
 db.delete! rescue nil
-db = couch.create_db('wide-finder2')
+db = couch.create_db('wide-finder')
 
 # usage: ruby import_log.rb logfile.log
 
