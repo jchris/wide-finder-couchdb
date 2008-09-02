@@ -11,15 +11,23 @@ def printTop(results, num = 10)
   end
 end
 
+puts "Top 10 URIs by Hits"
+results = db.view('wf/uri-hits-reduce', :group => true)
+printTop(results)
+
+puts
 puts "Top 10 URIs by Bytes"
 results = db.view('wf/uri-bytes-reduce', :group => true)
 printTop(results)
 
+puts
+puts "Top 10 404s by Hits"
+results = db.view('wf/404-hits-reduce', :group => true)
+printTop(results)
 
 puts
-puts "Top 10 URIs by Hits"
-
-results = db.view('wf/uri-hits-reduce', :group => true)
+puts "Top 10 404s by Bytes"
+results = db.view('wf/404-bytes-reduce', :group => true)
 printTop(results)
 
 

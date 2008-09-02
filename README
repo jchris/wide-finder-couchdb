@@ -1,0 +1,11 @@
+This is a rough analog of Tim Bray's Wide Finder benchmark, using CouchDB.
+
+I haven't started optimizing it yet, but on the initial test data, it takes about 5 minutes to compute the results.
+
+CouchDB has a very different performance profile than other processes in the WF Challenge. I fully expect CouchDB to be slower than the other entries. Maybe even a lot slower, for the initial calculation of results.
+
+However, CouchDB stores intermediate results. This means that if you were to add lines a few at a time, and query the totals occasionally, you'd get near instantaneous results all the time.
+
+CouchDB's concurrency model means that it makes a good candidate for a logging platform. Just post lines to CouchDB from your application, and let it handle keeping the reports up to date.
+
+You can even change the report ranges arbitrarily. Just the top 404's from this month, or this set of URLs? No problem.
